@@ -1,0 +1,44 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{graphicx}
+
+\def\neckWidth{6}
+\def\neckHeight{15}
+\def\bodyWidth{19}
+\def\bodyHeight{40}
+
+\begin{document}
+%\begin{tikzpicture}[x=1pt,y=1pt]
+\begin{tikzpicture}[scale=0.5,line width=5pt]
+
+% 丸底フラスコの首部分の左右の枠
+\draw (\neckWidth,0) -- (\neckWidth+1,\neckHeight);
+\draw (-\neckWidth,0) -- (-\neckWidth-1,\neckHeight);
+
+% 丸底フラスコの首部分の上下の楕円
+\draw (0,\neckHeight) ellipse ({\neckWidth+1} and 1);
+\draw (0,\neckHeight-\neckHeight) ellipse ({\neckWidth} and 1);
+
+% 丸底フラスコの胴部分の下半分の円弧
+\draw[fill=blue!18] (-\bodyWidth+0.,-\bodyHeight/2-4) arc (180:360:{\bodyWidth-0.} and {\bodyHeight/2-1});
+
+% 胴中心部の上凸円弧+グラデーション塗りつぶし
+\shade [inner color=blue!6, outer color=blue!18] (-\bodyWidth+0.05,-\bodyHeight/2-4.05) arc (180:0:{\bodyWidth-0.05} and 3);
+
+% 胴中心部の下凸円弧
+\draw (-\bodyWidth+0.01,-\bodyHeight/2-4) arc (180:360:{\bodyWidth-0.01} and 3);
+
+% 丸底フラスコの胴部分の上半分の枠
+\draw (-\neckWidth,0)
+.. controls (-\neckWidth,-6) and +(1,\bodyHeight/3+2)
+.. (-\bodyWidth,-\bodyHeight/2-4);
+\draw (\neckWidth,0)
+.. controls (\neckWidth,-6) and +(-1,\bodyHeight/3+2)
+.. (\bodyWidth,-\bodyHeight/2-4);
+
+% フラスコ内部の白い円
+\fill[white] (2,-\bodyHeight/2-12.5) circle [radius=2];
+\fill[white] (-2,-\bodyHeight/2-15.5) circle [radius=1.2];
+\fill[white] (1,-\bodyHeight/2-18.5) circle [radius=1.0];
+
+\end{tikzpicture}
+\end{document}
